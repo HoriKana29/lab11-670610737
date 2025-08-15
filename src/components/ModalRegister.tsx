@@ -12,6 +12,7 @@ export default function ModalRegister() {
   const [lnameError, setLnameError] = useState(false);
   const [planError, setPlanError] = useState(false);
   const [genderError, setGenderError] = useState(false);
+  const [isUserAgreed, setisUserAgreed] = useState(false);
   // ----------------------------------------------------------------
   const inputFnameOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFnameError(false);
@@ -49,6 +50,10 @@ export default function ModalRegister() {
   const cbBuyCapOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBuyCap(event.target.checked);
   };
+
+  const AgreeButtonChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
+    setisUserAgreed(event.target.checked);
+  }
 
   // ----------------------------------------------------------------
 
@@ -238,7 +243,10 @@ export default function ModalRegister() {
           <div className="modal-footer">
             {/* Terms and conditions */}
             <div>
-              <input className="me-2 form-check-input" type="checkbox" />I agree
+              <input className="me-2 form-check-input" type="checkbox" 
+              onChange={AgreeButtonChange}
+                  checked={isUserAgreed}
+                  />I agree
               to the terms and conditions
             </div>
             {/* Register Button */}
@@ -246,7 +254,7 @@ export default function ModalRegister() {
               className="btn btn-success my-2"
               onClick={registerBtnOnClick}
               //You can embbed a state like below to disabled the button
-              //disabled={isUserAgreed}
+              disabled={!isUserAgreed}
             >
               Register
             </button>
